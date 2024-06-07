@@ -25,6 +25,17 @@ require("lazy").setup(
 
     "nvim-treesitter/playground",
 
+  --treeview
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies =  {'nvim-tree/nvim-web-devicons'}, 
+    version = "*",
+    lazy = false,
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
+
     --Fuzzy finder
     {'nvim-telescope/telescope.nvim', tag = '0.1.6', dependencies = { 'nvim-lua/plenary.nvim' }},
   
@@ -32,16 +43,6 @@ require("lazy").setup(
     --Discord presence
     "andweeb/presence.nvim",
 
-    --treeview
-    {
-      'nvim-tree/nvim-tree.lua',
-      dependency =  {'nvim-tree/nvim-web-devicons'}, 
-      version = "*",
-      lazy = false,
-      config = function()
-        require("nvim-tree").setup {}
-      end,
-    },
     --LSP
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',

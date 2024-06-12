@@ -15,8 +15,9 @@ require("lazy").setup(
  {
     --themes
     "ellisonleao/gruvbox.nvim",
+    "EdenEast/nightfox.nvim",
+    "nyoom-engineering/oxocarbon.nvim",
     {"catppuccin/nvim", name = "catppuccin"},
-
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",
@@ -37,11 +38,11 @@ require("lazy").setup(
   },
 
     --Fuzzy finder
-    {'nvim-telescope/telescope.nvim', tag = '0.1.6', dependencies = { 'nvim-lua/plenary.nvim' }},
-  
+    {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
+
 
     --Discord presence
-    "andweeb/presence.nvim",
+    --"andweeb/presence.nvim",
 
     --LSP
     'williamboman/mason.nvim',
@@ -51,6 +52,5 @@ require("lazy").setup(
     {'hrsh7th/cmp-nvim-lsp'},
     {'hrsh7th/nvim-cmp'},
     {'L3MON4D3/LuaSnip'},
-
  }
 )

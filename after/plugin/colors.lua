@@ -62,8 +62,11 @@ require("catppuccin").setup({
         operators = {},
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
     },
-    color_overrides = {},
-    custom_highlights = {},
+    color_overrides = {
+    },
+    custom_highlights = {
+        --Normal = { bg = "#1e001c" },
+    },
     default_integrations = true,
     integrations = {
         cmp = true,

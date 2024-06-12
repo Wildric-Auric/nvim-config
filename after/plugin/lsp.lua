@@ -26,3 +26,5 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 lsp.set_preferences({
 	sign_icons = { }
 })
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});

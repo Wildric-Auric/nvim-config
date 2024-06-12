@@ -2,4 +2,3 @@ require("scripts.set")
 require("scripts.remap")
 require("scripts.lazy")
 
-print("Hello")

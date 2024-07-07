@@ -10,6 +10,22 @@ lsp.preset("recommended")
       function(server_name)
         require('lspconfig')[server_name].setup({})
       end,
+
+
+     clangd = function()
+      require('lspconfig').clangd.setup({
+        on_attach = function(_, bufnr)
+          vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader, { buffer = bufnr, desc = "Switch between so[u]rce / header" })
+        end,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--header-insertion=never"
+        },
+      })
+    end
+    
+
     },
   })
 
@@ -26,5 +42,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 lsp.set_preferences({
 	sign_icons = { }
 })
+
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});

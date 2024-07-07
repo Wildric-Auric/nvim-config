@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>tq", vim.cmd.tabonly)
 
 vim.keymap.set("x", "<leader>cc", ":s/^/\\/\\/<CR>") --Comment selected lines
 
-vim.keymap.set("n", "<left>",  "<Esc>")
-vim.keymap.set("n", "<right>", "<Esc>")
-vim.keymap.set("n", "<up>",    "<Esc>")
-vim.keymap.set("n", "<down>",  "<Esc>")
+vim.keymap.set("n", "<left>",  "i")
+vim.keymap.set("n", "<right>", "a")
+vim.keymap.set("n", "<up>",    "i")
+vim.keymap.set("n", "<down>",  "a")

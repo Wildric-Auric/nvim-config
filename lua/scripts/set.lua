@@ -19,7 +19,7 @@ vim.opt.termguicolors = true;
 vim.opt.scrolloff   = 5
 vim.opt.signcolumn  = "yes"
 vim.opt.isfname:append("@-@")
-vim.updatetime = 10
+vim.updatetime = 50
 vim.opt.colorcolumn = "0"
 
 vim.g.mapleader = " "

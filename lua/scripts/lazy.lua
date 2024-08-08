@@ -15,9 +15,13 @@ require("lazy").setup(
  {
     --themes
     "ellisonleao/gruvbox.nvim",
-    "EdenEast/nightfox.nvim",
-    "nyoom-engineering/oxocarbon.nvim",
     {"catppuccin/nvim", name = "catppuccin"},
+    { "rose-pine/neovim", name = "rose-pine"},
+
+    "rktjmp/lush.nvim",
+    {"metalelf0/jellybeans-nvim", name "jellybeans"},
+    --"rebelot/kanagawa.nvim",
+    --"EdenEast/nightfox.nvim", --"nyoom-engineering/oxocarbon.nvim",
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",

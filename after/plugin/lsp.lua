@@ -45,3 +45,4 @@ lsp.set_preferences({
 
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});

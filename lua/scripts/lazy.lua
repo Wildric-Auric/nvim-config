@@ -19,7 +19,9 @@ require("lazy").setup(
     { "rose-pine/neovim", name = "rose-pine"},
 
     "rktjmp/lush.nvim",
-    {"metalelf0/jellybeans-nvim", name "jellybeans"},
+    "metalelf0/jellybeans-nvim",
+    { "EdenEast/nightfox.nvim" },
+
     --"rebelot/kanagawa.nvim",
     --"EdenEast/nightfox.nvim", --"nyoom-engineering/oxocarbon.nvim",
     --Parser, highlight
@@ -56,5 +58,8 @@ require("lazy").setup(
     {'hrsh7th/cmp-nvim-lsp'},
     {'hrsh7th/nvim-cmp'},
     {'L3MON4D3/LuaSnip'},
+
+    --Autosave
+    {"pocco81/auto-save.nvim"}
  }
 )

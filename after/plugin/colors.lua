@@ -1,4 +1,4 @@
-local defaultColor = "gruvbox"
+local defaultColor = "jellybeans-nvim"
 function Colorize(color)
 	color = color or defaultColor
 	vim.cmd.colorscheme(color)

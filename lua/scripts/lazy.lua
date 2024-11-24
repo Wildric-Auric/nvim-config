@@ -17,9 +17,10 @@ require("lazy").setup(
     "ellisonleao/gruvbox.nvim",
     {"catppuccin/nvim", name = "catppuccin"},
     { "rose-pine/neovim", name = "rose-pine"},
-
     "rktjmp/lush.nvim",
     "metalelf0/jellybeans-nvim",
+    "https://github.com/rebelot/kanagawa.nvim",
+    "https://github.com/artanikin/vim-synthwave84",
     { "EdenEast/nightfox.nvim" },
 
     --"rebelot/kanagawa.nvim",
@@ -60,6 +61,6 @@ require("lazy").setup(
     {'L3MON4D3/LuaSnip'},
 
     --Autosave
-    {"pocco81/auto-save.nvim"}
+    --{"pocco81/auto-save.nvim"} //Maybe conflicts with lsp on windows
  }
 )

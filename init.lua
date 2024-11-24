@@ -2,3 +2,9 @@ require("scripts.set")
 require("scripts.remap")
 require("scripts.lazy")
 
+vim.cmd([[
+augroup _glsl 
+autocmd!
+autocmd BufRead,BufEnter *.{vert,frag,tesc,tese,geom,comp,shader} set filetype=glsl
+augroup end
+]])

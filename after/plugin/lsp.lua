@@ -1,18 +1,51 @@
 local lsp = require("lsp-zero")
 
+
+--filetypes = { 'vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 lsp.preset("recommended")
   require('mason').setup({})
-  require('mason-lspconfig').setup({
-    -- Replace the language servers listed here 
-    -- with the ones you want to install
-    ensure_installed = {'tsserver', 'clangd', 'lua_ls','rust_analyzer'},
+  local mas = require 'mason-lspconfig'
+
+  mas.setup({
+    ensure_installed = {'tsserver', 'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'kotlin_language_server'},
     handlers = {
-      function(server_name)
-        require('lspconfig')[server_name].setup({})
-      end,
+    function(server_name)
+      require('lspconfig')[server_name].setup({})
+   end,
 
+    glsl_analyzer = function()
+        require('lspconfig').glsl_analyzer.setup({
+          filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
+        })
+    end,
 
-     clangd = function()
+    kotlin_language_server = function()
+            require('lspconfig').kotlin_language_server.setup({
+                --cmd = {"C:\\Program Files\\Android\\Android Studio\\jbr\\bin",},
+                root_dir = require('lspconfig').util.root_pattern(
+                "settings.gradle",
+                "settings.gradle.kts",
+                "build.gradle",
+                "build.gradle.kts",
+                "pom.xml",
+                ".git"),
+                filetypes = { 'kt', 'kts', 'kotlin'  }, -- Ensure Kotlin files are covered
+            })
+    end,
+
+    lua_ls = function()
+        require('lspconfig').lua_ls.setup({
+          filetypes = { 'lua' };
+          settings = {Lua ={diagnostics = {
+                    globals = { 'vim' },
+                },},
+--                workspace = { library = vim.api.nvim_get_runtime_file("", true),},
+--                telemetry = { enable = false, },
+            },
+        })
+    end,
+
+    clangd = function()
       require('lspconfig').clangd.setup({
         on_attach = function(_, bufnr)
           vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader, { buffer = bufnr, desc = "Switch between so[u]rce / header" })
@@ -23,11 +56,10 @@ lsp.preset("recommended")
           "--header-insertion=never"
         },
       })
-    end
-    
-
+    end,
     },
   })
+
 
 local cmp = require('cmp')
 local cmp_select = {behaviour = cmp.SelectBehavior.Select}

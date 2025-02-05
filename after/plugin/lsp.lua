@@ -7,7 +7,7 @@ lsp.preset("recommended")
   local mas = require 'mason-lspconfig'
 
   mas.setup({
-    ensure_installed = {'tsserver', 'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'kotlin_language_server'},
+    ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'kotlin_language_server'},
     handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})

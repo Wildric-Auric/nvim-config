@@ -19,10 +19,9 @@ require("lazy").setup(
     { "rose-pine/neovim", name = "rose-pine"},
     "rktjmp/lush.nvim",
     "metalelf0/jellybeans-nvim",
-    "https://github.com/rebelot/kanagawa.nvim",
-    "https://github.com/artanikin/vim-synthwave84",
-    { "EdenEast/nightfox.nvim" },
-
+    "rebelot/kanagawa.nvim",
+    "artanikin/vim-synthwave84",
+    "EdenEast/nightfox.nvim",
     --"rebelot/kanagawa.nvim",
     --"EdenEast/nightfox.nvim", --"nyoom-engineering/oxocarbon.nvim",
     --Parser, highlight
@@ -36,7 +35,7 @@ require("lazy").setup(
   --treeview
   {
     'nvim-tree/nvim-tree.lua',
-    dependencies =  {'nvim-tree/nvim-web-devicons'}, 
+    dependencies =  {'nvim-tree/nvim-web-devicons'},
     version = "*",
     lazy = false,
     config = function()
@@ -46,11 +45,6 @@ require("lazy").setup(
 
     --Fuzzy finder
     {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
-
-
-    --Discord presence
-    --"andweeb/presence.nvim",
-
     --LSP
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -60,7 +54,7 @@ require("lazy").setup(
     {'hrsh7th/nvim-cmp'},
     {'L3MON4D3/LuaSnip'},
 
-    --Autosave
-    --{"pocco81/auto-save.nvim"} //Maybe conflicts with lsp on windows
+    'hrsh7th/cmp-nvim-lua',
+
  }
 )

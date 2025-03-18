@@ -39,8 +39,13 @@ lsp.preset("recommended")
           settings = {Lua ={diagnostics = {
                     globals = { 'vim' },
                 },},
---                workspace = { library = vim.api.nvim_get_runtime_file("", true),},
---                telemetry = { enable = false, },
+                workspace = {
+                    library = {
+                        vim.fn.expand("$VIMRUNTIME/lua"),
+                        vim.fn.stdpath("config") .. "/lua",
+                    },
+                },
+--              telemetry = { enable = false, },
             },
         })
     end,
@@ -75,6 +80,11 @@ lsp.set_preferences({
 	sign_icons = { }
 })
 
+cmp.setup {
+    sources = {
+        {name = 'nvim_lua'}
+    }
+}
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});

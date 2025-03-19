@@ -1,4 +1,4 @@
-local defaultColor = "jellybeans-nvim"
+local defaultColor = "retrobox"
 function Colorize(color)
 	color = color or defaultColor
 	vim.cmd.colorscheme(color)

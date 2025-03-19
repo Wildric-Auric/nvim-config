@@ -1,7 +1,22 @@
 local lsp = require("lsp-zero")
 
+local cmp = require('cmp')
+local cmp_select = {behaviour = cmp.SelectBehavior.Select}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+	['<C-CR>'] = cmp.mapping.confirm({select = true}),
+	['<C-Space>'] = cmp.mapping.complete(),
+})
 
---filetypes = { 'vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
+--require('cmp').setup {
+--    sources = {
+--        {name = 'nvim_lua'}
+--    }
+--}
+
+filetypes = { 'vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
+
 lsp.preset("recommended")
   require('mason').setup({})
   local mas = require 'mason-lspconfig'
@@ -66,25 +81,11 @@ lsp.preset("recommended")
   })
 
 
-local cmp = require('cmp')
-local cmp_select = {behaviour = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-CR>'] = cmp.mapping.confirm({select = true}),
-	['<C-Space>'] = cmp.mapping.complete(),
-})
-
 
 lsp.set_preferences({
 	sign_icons = { }
 })
 
-cmp.setup {
-    sources = {
-        {name = 'nvim_lua'}
-    }
-}
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});

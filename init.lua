@@ -1,6 +1,7 @@
 require("scripts.set")
 require("scripts.remap")
 require("scripts.lazy")
+require("scripts.ql")
 
 vim.cmd([[
 augroup _glsl 

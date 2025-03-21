@@ -1,8 +1,3 @@
-local defaultColor = "retrobox"
-function Colorize(color)
-	color = color or defaultColor
-	vim.cmd.colorscheme(color)
-end
 
 --  options for gruvbox:
 require("gruvbox").setup({
@@ -174,9 +169,3 @@ require('kanagawa').setup({
         light = "lotus"
     },
 })
-
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa")
-
-
-Colorize()

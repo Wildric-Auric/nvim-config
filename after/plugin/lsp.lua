@@ -1,21 +1,26 @@
+local vimApiConfig = false --set to true only when you want to edit lua scripts for neovim then set to false
+
+
 local lsp = require("lsp-zero")
 
 local cmp = require('cmp')
 local cmp_select = {behaviour = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
+
+lsp.defaults.cmp_mappings({
 	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
 	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
 	['<C-CR>'] = cmp.mapping.confirm({select = true}),
 	['<C-Space>'] = cmp.mapping.complete(),
 })
 
---require('cmp').setup {
---    sources = {
---        {name = 'nvim_lua'}
---    }
---}
-
-filetypes = { 'vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
+if vimApiConfig
+then
+require('cmp').setup {
+    sources = {
+        {name = 'nvim_lua'}
+    }
+}
+end
 
 lsp.preset("recommended")
   require('mason').setup({})

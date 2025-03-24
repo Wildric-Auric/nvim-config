@@ -14,16 +14,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
  {
     --themes
-    "ellisonleao/gruvbox.nvim",
     {"catppuccin/nvim", name = "catppuccin"},
-    { "rose-pine/neovim", name = "rose-pine"},
     "rktjmp/lush.nvim",
     "metalelf0/jellybeans-nvim",
     "rebelot/kanagawa.nvim",
-    "artanikin/vim-synthwave84",
     "EdenEast/nightfox.nvim",
-    --"rebelot/kanagawa.nvim",
-    --"EdenEast/nightfox.nvim", --"nyoom-engineering/oxocarbon.nvim",
+    "folke/tokyonight.nvim",
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",

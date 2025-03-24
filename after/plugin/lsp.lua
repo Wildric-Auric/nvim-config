@@ -91,6 +91,7 @@ lsp.set_preferences({
 	sign_icons = { }
 })
 
+vim.lsp.set_log_level("off")
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});

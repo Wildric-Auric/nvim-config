@@ -6,7 +6,7 @@ if vim.fn.isdirectory(pref) == 0 then
 end
 local QLdefColPath = pref .. "/qlDefCol"
 
-function QLFetchDefaultCol()
+function QLReadDefCol()
     local file = io.open(QLdefColPath, "r")
     local col = defaultCol
     if file ~= nil then
@@ -18,11 +18,12 @@ function QLFetchDefaultCol()
     col = col:gsub("%s+", "")
     io.close(file)
     end
-    vim.cmd.colorscheme(col)
+    return col
 end
 
-
-QLFetchDefaultCol()
+function QLFetchDefaultCol()
+    vim.cmd.colorscheme(QLReadDefCol())
+end
 
 function QLSaveDefaultCol(c)
     local file = io.open(QLdefColPath, "w+")
@@ -30,6 +31,11 @@ function QLSaveDefaultCol(c)
     io.write(c)
     io.close()
 end
+
+function QLGetDefCol()
+    vim.print(QLReadDefCol())
+end
+
 vim.api.nvim_create_user_command("QLsetDefCol",
 function(opts)
     QLSaveDefaultCol(opts.args)
@@ -37,3 +43,11 @@ end, {
     nargs = 1,
     complete = "color"
 })
+
+vim.api.nvim_create_user_command("QLgetDefCol",
+function()
+    QLGetDefCol()
+end, {}
+)
+
+QLFetchDefaultCol()

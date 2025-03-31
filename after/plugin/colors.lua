@@ -90,16 +90,30 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "zaibatsu",
   callback = function()
     vim.cmd([[
+      hi! NormalFloat guibg=#151515 guifg=#d3c6aa
       hi! Pmenu guibg=#151515 guifg=#d3c6aa
       hi! PmenuSel guibg=#45403d guifg=#d3c6aa
-      hi! PmenuSbar guibg=#252525
-      hi! PmenuThumb guibg=#656565
+      hi! PmenuSbar guibg=#252525 
+      hi! PmenuThumb guibg=#656565 
     ]])
   end
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "zaibatsu",
+  callback = function()
+    vim.cmd([[
+      hi! CmpItemAbbr guifg=#d3c6aa
+      hi! CmpItemKind guifg=#d3c6aa
+      hi! CmpItemMenu guifg=#d3c6aa
+      hi! CmpItemAbbrMatch guifg=#d3c6aa
+      hi! CmpItemAbbrMatchFuzzy guifg=#d3c6aa
+    ]])
+  end
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "zaibatsu",
   callback = function()
     vim.cmd([[
       hi! MatchParen guibg=#45403d guifg=#d3c6aa gui=bold

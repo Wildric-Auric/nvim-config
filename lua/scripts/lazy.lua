@@ -51,7 +51,6 @@ require("lazy").setup(
     {'L3MON4D3/LuaSnip'},
     'hrsh7th/cmp-nvim-lua',
     --Startup
-    {'goolord/alpha-nvim'}
-
+    {'goolord/alpha-nvim'},
  }
 )

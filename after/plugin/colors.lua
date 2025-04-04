@@ -121,4 +121,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "retrobox",
+  callback = function()
+    vim.cmd([[
+      hi! Normal guibg=#101010
+    ]])
+  end
+})
+
 

@@ -52,5 +52,7 @@ require("lazy").setup(
     'hrsh7th/cmp-nvim-lua',
     --Startup
     {'goolord/alpha-nvim'},
- }
+    --StatusLine
+    {'nvim-lualine/lualine.nvim'},
+}
 )

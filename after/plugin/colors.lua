@@ -126,6 +126,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.cmd([[
       hi! Normal guibg=#101010
+      hi! SignColumn guibg=#101010
     ]])
   end
 })

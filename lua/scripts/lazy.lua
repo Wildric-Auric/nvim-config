@@ -39,20 +39,22 @@ require("lazy").setup(
     end,
   },
 
-    --Fuzzy finder
-    {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
-    --LSP
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-    {'neovim/nvim-lspconfig'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/nvim-cmp'},
-    {'L3MON4D3/LuaSnip'},
-    'hrsh7th/cmp-nvim-lua',
-    --Startup
-    {'goolord/alpha-nvim'},
-    --StatusLine
-    {'nvim-lualine/lualine.nvim'},
+   --Navigatoin
+   {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
+   {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
+   --LSP
+   'williamboman/mason.nvim',
+   'williamboman/mason-lspconfig.nvim',
+   {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+   {'neovim/nvim-lspconfig'},
+   {'hrsh7th/cmp-nvim-lsp'},
+   {'hrsh7th/nvim-cmp'},
+   {'L3MON4D3/LuaSnip'},
+   'hrsh7th/cmp-nvim-lua',
+   {'Issafalcon/lsp-overloads.nvim'},
+   --Startup
+   {'goolord/alpha-nvim'},
+   --StatusLine
+   {'nvim-lualine/lualine.nvim'},
 }
 )

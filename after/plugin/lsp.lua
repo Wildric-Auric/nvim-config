@@ -1,4 +1,4 @@
-local vimApiConfig = false --set to true only when you want to edit lua scripts for neovim then set to false
+local vimApiConfig = true --set to true only when you want to edit lua scripts for neovim then set to false
 
 
 local lsp = require("lsp-zero")
@@ -72,8 +72,11 @@ lsp.preset("recommended")
 
     clangd = function()
       require('lspconfig').clangd.setup({
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
           vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader, { buffer = bufnr, desc = "Switch between so[u]rce / header" })
+            if client.server_capabilities.signatureHelpProvider then
+                 require('lsp-overloads').setup(client, { })
+            end
         end,
         cmd = {
           "clangd",

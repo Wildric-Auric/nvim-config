@@ -1,4 +1,4 @@
-local vimApiConfig = true --set to true only when you want to edit lua scripts for neovim then set to false
+local vimApiConfig = false--set to true only when you want to edit lua scripts for neovim then set to false
 
 
 local lsp = require("lsp-zero")

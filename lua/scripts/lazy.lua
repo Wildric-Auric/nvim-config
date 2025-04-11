@@ -39,7 +39,7 @@ require("lazy").setup(
     end,
   },
 
-   --Navigatoin
+   --Navigation
    {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
    --LSP
@@ -56,5 +56,8 @@ require("lazy").setup(
    {'goolord/alpha-nvim'},
    --StatusLine
    {'nvim-lualine/lualine.nvim'},
+   --HexEditor
+   --Depends on xxd
+   {'RaafatTurki/hex.nvim'}
 }
 )

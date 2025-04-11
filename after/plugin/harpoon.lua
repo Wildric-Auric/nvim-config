@@ -44,8 +44,8 @@ vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<C-A-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-A-N>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<C-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-N>", function() harpoon:list():next() end)
 
 vim.keymap.set("n", "<leader>fh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 --vim.keymap.set("n", "<leader>fh", function() toggle_telescope(harpoon:list()) end,

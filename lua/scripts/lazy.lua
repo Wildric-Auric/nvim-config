@@ -27,18 +27,9 @@ require("lazy").setup(
     },
 
     "nvim-treesitter/playground",
-
+    {'nvim-tree/nvim-web-devicons'},
   --treeview
-  {
-    'nvim-tree/nvim-tree.lua',
-    dependencies =  {'nvim-tree/nvim-web-devicons'},
-    version = "*",
-    lazy = false,
-    config = function()
-      require("nvim-tree").setup {}
-    end,
-  },
-
+    {"stevearc/oil.nvim"},
    --Navigation
    {'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' }},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},

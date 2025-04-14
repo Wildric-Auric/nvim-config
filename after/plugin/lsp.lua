@@ -27,7 +27,7 @@ lsp.preset("recommended")
   local mas = require 'mason-lspconfig'
 
   mas.setup({
-    ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'kotlin_language_server'},
+    ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'pylsp', 'kotlin_language_server'},
     handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
@@ -68,6 +68,21 @@ lsp.preset("recommended")
 --              telemetry = { enable = false, },
             },
         })
+    end,
+
+    pylsp = function()
+        require'lspconfig'.pylsp.setup{
+          settings = {
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  ignore = {'W391', 'E302','E225', 'W291', 'E113', 'E112', 'E111', 'W293', 'E301'},
+                  --maxLineLength = 0
+                }
+              }
+            }
+          }
+        }
     end,
 
     clangd = function()

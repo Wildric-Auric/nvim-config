@@ -111,6 +111,28 @@ lsp.set_preferences({
 
 vim.lsp.set_log_level("off")
 
+
+local function Is_clang_active()
+    local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+    for _, client in ipairs(clients) do
+      if client.name == "clangd" then
+            return true
+      end
+    end
+    return false
+end
+local function Find_Impl(token)
+    if Is_clang_active() == false then
+        return
+    end
+    if string.len(token) < 1 then
+        return
+    end
+    local builtin = require('telescope.builtin')
+    builtin.grep_string( { search = "::" .. token .. "("} )
+end
+
+vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {});

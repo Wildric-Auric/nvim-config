@@ -6,5 +6,7 @@ vim.keymap.set('n', '<leader>fdf',
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 vim.keymap.set('n', '<leader>fw', function()
 	builtin.grep_string( { search = vim.fn.input("Grep > ") } ) end)
+vim.keymap.set('n', '<leader>fcw', function()
+	builtin.grep_string( { search = vim.fn.expand("<cword>") } ) end)
 vim.keymap.set('n', '<leader>frw', function()
     builtin.grep_string( { search = vim.fn.input("Regex Grep > ")}, {use_regex=true}) end)

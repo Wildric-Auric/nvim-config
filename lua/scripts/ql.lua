@@ -42,6 +42,15 @@ function QLGetDefCol()
     vim.print(QLReadDefCol())
 end
 
+function PrintHex(num)
+    local dec = tonumber(num)
+    if dec == nil then
+        print("Invalid argument; provide a number")
+        return
+    end
+    print(string.format("0x%X",dec))
+end
+
 vim.api.nvim_create_user_command("QLsetDefCol",
 function(opts)
     QLSaveDefaultCol(opts.args)
@@ -56,12 +65,12 @@ function()
 end, {}
 )
 
-vim.api.nvim_create_user_command("QLclangFmt",
-    function()
-        QLclangFmt()
-    end, {
-        nargs = 0,
-    }
+vim.api.nvim_create_user_command("QLHex",
+function(opts)
+    PrintHex(opts.args)
+end, {
+    nargs = 1
+}
 )
 
 QLFetchDefaultCol()

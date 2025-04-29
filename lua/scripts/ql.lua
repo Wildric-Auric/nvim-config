@@ -73,4 +73,12 @@ end, {
 }
 )
 
+vim.api.nvim_create_user_command("QLHex",
+function()
+    QLclangFmt()
+end, {
+    nargs = 0
+}
+)
+
 QLFetchDefaultCol()

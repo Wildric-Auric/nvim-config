@@ -29,3 +29,5 @@ vim.keymap.set("n", "<leader>tt",  ":Oil<CR>")
 vim.keymap.set("t", "<C-o>", [[<C-\><C-n>]])
 --copy using the clipboard
 vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-_>", "<C-^>", { noremap = true })

@@ -32,6 +32,12 @@ function QLSaveDefaultCol(c)
     io.close()
 end
 
+function QLclangFmt()
+    local f = vim.fn.expand("%:p")
+    vim.fn.system({'clang-format', '-i', f})
+    vim.cmd('e')
+end
+
 function QLGetDefCol()
     vim.print(QLReadDefCol())
 end
@@ -48,6 +54,14 @@ vim.api.nvim_create_user_command("QLgetDefCol",
 function()
     QLGetDefCol()
 end, {}
+)
+
+vim.api.nvim_create_user_command("QLclangFmt",
+    function()
+        QLclangFmt()
+    end, {
+        nargs = 0,
+    }
 )
 
 QLFetchDefaultCol()

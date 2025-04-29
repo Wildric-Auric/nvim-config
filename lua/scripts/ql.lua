@@ -73,7 +73,7 @@ end, {
 }
 )
 
-vim.api.nvim_create_user_command("QLHex",
+vim.api.nvim_create_user_command("QLclangFmt",
 function()
     QLclangFmt()
 end, {

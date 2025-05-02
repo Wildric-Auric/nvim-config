@@ -31,3 +31,7 @@ vim.keymap.set("t", "<C-o>", [[<C-\><C-n>]])
 vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-_>", "<C-^>", { noremap = true })
+
+vim.keymap.set("n","<C-j>", vim.diagnostic.goto_next);
+
+vim.keymap.set("n","<C-k>", vim.diagnostic.goto_prev);

@@ -90,7 +90,16 @@ lsp.preset("recommended")
         on_attach = function(client, bufnr)
           vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader, { buffer = bufnr, desc = "Switch between so[u]rce / header" })
             if client.server_capabilities.signatureHelpProvider then
-                 require('lsp-overloads').setup(client, { })
+                 require('lsp-overloads').setup(client,
+                 {
+                      keymaps = {
+                      next_signature = "<C-j>",
+                      previous_signature = "<C-k>",
+                      next_parameter = "<C-l>",
+                      previous_parameter = "<C-h>",
+                      close_signature = "<Tab>"
+                     }
+                 })
             end
         end,
         cmd = {

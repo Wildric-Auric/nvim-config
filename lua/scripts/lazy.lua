@@ -11,15 +11,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
- {
+require("lazy").setup({
     --themes
-    {"catppuccin/nvim", name = "catppuccin"},
     "rktjmp/lush.nvim",
-    "metalelf0/jellybeans-nvim",
-    "rebelot/kanagawa.nvim",
     "EdenEast/nightfox.nvim",
-    "folke/tokyonight.nvim",
+    {"rose-pine/neovim", name = "rose-pine"},
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",

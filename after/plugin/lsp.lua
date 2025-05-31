@@ -1,17 +1,36 @@
-local vimApiConfig = false--set to true only when you want to edit lua scripts for neovim then set to false
 
-
-local lsp = require("lsp-zero")
-
+local vimApiConfig = false
 local cmp = require('cmp')
-local cmp_select = {behaviour = cmp.SelectBehavior.Select}
-
-lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-CR>'] = cmp.mapping.confirm({select = true}),
-	['<C-Space>'] = cmp.mapping.complete(),
-})
+local luasnip = require('luasnip')
+cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-y>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 if vimApiConfig
 then
@@ -22,100 +41,84 @@ require('cmp').setup {
 }
 end
 
-lsp.preset("recommended")
-  require('mason').setup({})
-  local mas = require 'mason-lspconfig'
-
-  mas.setup({
+require('mason').setup({})
+require('mason-lspconfig').setup({
     ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'pylsp', 'kotlin_language_server'},
-    handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({})
-   end,
+    automatic_enable = false,
+})
 
-    glsl_analyzer = function()
-        require('lspconfig').glsl_analyzer.setup({
-          filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
-        })
-    end,
+local lspconf = require('lspconfig')
 
-    kotlin_language_server = function()
-            require('lspconfig').kotlin_language_server.setup({
-                --cmd = {"C:\\Program Files\\Android\\Android Studio\\jbr\\bin",},
-                root_dir = require('lspconfig').util.root_pattern(
-                "settings.gradle",
-                "settings.gradle.kts",
-                "build.gradle",
-                "build.gradle.kts",
-                "pom.xml",
-                ".git"),
-                filetypes = { 'kt', 'kts', 'kotlin'  }, -- Ensure Kotlin files are covered
-            })
-    end,
+lspconf.glsl_analyzer.setup({
+      capabilities = capabilities,
+      filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
+})
 
-    lua_ls = function()
-        require('lspconfig').lua_ls.setup({
-          filetypes = { 'lua' };
-          settings = {Lua ={diagnostics = {
-                    globals = { 'vim' },
-                },},
-                workspace = {
-                    library = {
-                        vim.fn.expand("$VIMRUNTIME/lua"),
-                        vim.fn.stdpath("config") .. "/lua",
-                    },
+lspconf.kotlin_language_server.setup({
+       capabilities = capabilities,
+        --cmd = {"C:\\Program Files\\Android\\Android Studio\\jbr\\bin",},
+        root_dir = require('lspconfig').util.root_pattern(
+        "settings.gradle",
+        "settings.gradle.kts",
+        "build.gradle",
+        "build.gradle.kts",
+        "pom.xml",
+        ".git"),
+        filetypes = { 'kt', 'kts', 'kotlin'  }, -- Ensure Kotlin files are covered
+})
+
+lspconf.lua_ls.setup({
+      capabilities = capabilities,
+      filetypes = { 'lua' };
+      settings = {Lua ={diagnostics = {
+                globals = { 'vim' },
+            },},
+            workspace = {
+                library = {
+                    vim.fn.expand("$VIMRUNTIME/lua"),
+                    vim.fn.stdpath("config") .. "/lua",
                 },
---              telemetry = { enable = false, },
             },
-        })
-    end,
+--              telemetry = { enable = false, },
+        },
+})
 
-    pylsp = function()
-        require'lspconfig'.pylsp.setup{
-          settings = {
-            pylsp = {
-              plugins = {
-                pycodestyle = {
-                  ignore = {'W391', 'E302','E225', 'W291', 'E113', 'E112', 'E111', 'W293', 'E301'},
-                  --maxLineLength = 0
-                }
-              }
+lspconf.pylsp.setup({
+      capabilities = capabilities,
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              ignore = {'W391', 'E302','E225', 'W291', 'E113', 'E112', 'E111', 'W293', 'E301'},
+              --maxLineLength = 0
             }
           }
         }
-    end,
+      }
+})
 
-    clangd = function()
-      require('lspconfig').clangd.setup({
-        on_attach = function(client, bufnr)
-          vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader, { buffer = bufnr, desc = "Switch between so[u]rce / header" })
-            if client.server_capabilities.signatureHelpProvider then
-                 require('lsp-overloads').setup(client,
-                 {
-                      keymaps = {
-                      next_signature = "<C-j>",
-                      previous_signature = "<C-k>",
-                      next_parameter = "<C-l>",
-                      previous_parameter = "<C-h>",
-                      close_signature = "<Tab>"
-                     }
-                 })
-            end
-        end,
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--header-insertion=never"
-        },
-      })
+lspconf.clangd.setup({
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+    vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader)
+        if client.server_capabilities.signatureHelpProvider then
+             require('lsp-overloads').setup(client,
+             {
+                  keymaps = {
+                  next_signature = "<C-j>",
+                  previous_signature = "<C-k>",
+                  next_parameter = "<C-l>",
+                  previous_parameter = "<C-h>",
+                  close_signature = "<Tab>"
+                 }
+             })
+        end
     end,
+    cmd = {
+      "clangd",
+      "--background-index",
+      "--header-insertion=never"
     },
-  })
-
-
-
-lsp.set_preferences({
-	sign_icons = { }
 })
 
 vim.lsp.set_log_level("off")

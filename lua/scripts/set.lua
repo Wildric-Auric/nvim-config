@@ -2,6 +2,7 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.smartindent = false
+vim.opt.cindent     = false
 local indentValue 	= 4
 vim.opt.tabstop 	= indentValue
 vim.opt.softtabstop = indentValue

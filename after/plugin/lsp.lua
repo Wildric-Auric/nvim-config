@@ -47,27 +47,15 @@ require('mason-lspconfig').setup({
     automatic_enable = false,
 })
 
-local lspconf = require('lspconfig')
+local lspconf = vim.lsp
 
-lspconf.glsl_analyzer.setup({
+lspconf.config('glsl_analyzer', {
       capabilities = capabilities,
       filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 })
+lspconf.enable('glsl_analyzer')
 
-lspconf.kotlin_language_server.setup({
-       capabilities = capabilities,
-        --cmd = {"C:\\Program Files\\Android\\Android Studio\\jbr\\bin",},
-        root_dir = require('lspconfig').util.root_pattern(
-        "settings.gradle",
-        "settings.gradle.kts",
-        "build.gradle",
-        "build.gradle.kts",
-        "pom.xml",
-        ".git"),
-        filetypes = { 'kt', 'kts', 'kotlin'  }, -- Ensure Kotlin files are covered
-})
-
-lspconf.lua_ls.setup({
+lspconf.config('lua_ls', {
       capabilities = capabilities,
       filetypes = { 'lua' };
       settings = {Lua ={diagnostics = {
@@ -82,8 +70,9 @@ lspconf.lua_ls.setup({
 --              telemetry = { enable = false, },
         },
 })
+lspconf.enable('lua_ls')
 
-lspconf.pylsp.setup({
+lspconf.config('pylsp', {
       capabilities = capabilities,
       settings = {
         pylsp = {
@@ -96,8 +85,10 @@ lspconf.pylsp.setup({
         }
       }
 })
+lspconf.enable('pylsp')
 
-lspconf.clangd.setup({
+require("clangd_extensions").setup({})
+lspconf.config('clangd', {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
     vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader)
@@ -120,9 +111,8 @@ lspconf.clangd.setup({
       "--header-insertion=never"
     },
 })
-
-vim.lsp.set_log_level("off")
-
+lspconf.enable('clangd')
+lspconf.set_log_level("off")
 
 local function Is_clang_active()
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
@@ -143,8 +133,9 @@ local function Find_Impl(token)
     local builtin = require('telescope.builtin')
     builtin.grep_string( { search = "::" .. token .. "("} )
 end
-
+    
 vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {});
+

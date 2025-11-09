@@ -30,14 +30,14 @@ require("lazy").setup({
    {'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
    --LSP
-   'williamboman/mason.nvim',
-   'williamboman/mason-lspconfig.nvim',
-   {'neovim/nvim-lspconfig'},
+   {'williamboman/mason.nvim'},
+   {'williamboman/mason-lspconfig.nvim'},
    {'hrsh7th/cmp-nvim-lsp'},
    {'hrsh7th/nvim-cmp'},
    {'L3MON4D3/LuaSnip'},
-   'hrsh7th/cmp-nvim-lua',
+   {'hrsh7th/cmp-nvim-lua'},
    {'Issafalcon/lsp-overloads.nvim'},
+   {"p00f/clangd_extensions.nvim"},
    --Startup
    {'goolord/alpha-nvim'},
    --StatusLine

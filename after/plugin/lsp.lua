@@ -1,49 +1,54 @@
+vim.api.nvim_create_autocmd("InsertEnter", { -- load only on start typing
+  once = true,
+  callback = function()
+        local vimApiConfig = false
+        local cmp = require('cmp')
+        local luasnip = require('luasnip')
+        cmp.setup({
+            snippet = {
+              -- REQUIRED - you must specify a snippet engine
+              expand = function(args)
+                 require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+              end,
+            },
+            window = {
+              -- completion = cmp.config.window.bordered(),
+              -- documentation = cmp.config.window.bordered(),
+            },
+            mapping = cmp.mapping.preset.insert({
+              ['<C-n>'] = cmp.mapping.select_next_item(),
+              ['<C-p>'] = cmp.mapping.select_prev_item(),
+              ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+              ['<C-f>'] = cmp.mapping.scroll_docs(4),
+              ['<C-y>'] = cmp.mapping.complete(),
+              ['<C-e>'] = cmp.mapping.abort(),
+              ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            }),
+            sources = cmp.config.sources({
+              { name = 'nvim_lsp' },
+              { name = 'luasnip' }, -- For luasnip users.
+            }, {
+              { name = 'buffer' },
+            })
+          })
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local vimApiConfig = false
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-y>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' }, -- For luasnip users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-if vimApiConfig
-then
-require('cmp').setup {
-    sources = {
-        {name = 'nvim_lua'}
-    }
-}
-end
+        if vimApiConfig
+        then
+        require('cmp').setup {
+            sources = {
+                {name = 'nvim_lua'}
+            }
+        }
+        end
+    --
+  end,
+})
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'pylsp', 'kotlin_language_server'},
+    ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'pylsp'},
     automatic_enable = false,
 })
 

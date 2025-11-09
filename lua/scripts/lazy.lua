@@ -1,3 +1,19 @@
+
+function TsConfig()
+    require'nvim-treesitter.configs'.setup {
+        ensure_installed = {}, --"lua","c","cpp","rust","markdown"
+        sync_install = false,
+        auto_install = true,
+        ignore_install = { },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {enable = false}
+    }
+end
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -20,9 +36,10 @@ require("lazy").setup({
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
+      config = TsConfig
     },
 
-    "nvim-treesitter/playground",
+    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"},
     {'nvim-tree/nvim-web-devicons'},
   --treeview
     {"stevearc/oil.nvim"},

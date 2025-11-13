@@ -111,6 +111,22 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end
 })
 
+
+function FixEndBuff()
+    local n = vim.api.nvim_get_hl(0, {name = "Normal"})
+    if n == nil or n.bg == nil then return end
+    local bg = string.format("#%06x", n.bg)
+    vim.cmd("hi EndOfBuffer guibg=" .. bg)
+end
+
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = FixEndBuff
+})
+
+FixEndBuff()
+
 --vim.api.nvim_create_autocmd("ColorScheme", {
 --    pattern = "retrobox",
 --  callback = function()

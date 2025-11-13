@@ -61,19 +61,22 @@ lspconf.config('glsl_analyzer', {
 lspconf.enable('glsl_analyzer')
 
 lspconf.config('lua_ls', {
-      capabilities = capabilities,
-      filetypes = { 'lua' };
-      settings = {Lua ={diagnostics = {
-                globals = { 'vim' },
-            },},
-            workspace = {
-                library = {
-                    vim.fn.expand("$VIMRUNTIME/lua"),
-                    vim.fn.stdpath("config") .. "/lua",
-                },
-            },
---              telemetry = { enable = false, },
-        },
+  capabilities = capabilities,
+  filetypes = { 'lua' },
+  settings = {
+    Lua = {
+      diagnostics = { globals = { 'vim' } },
+      workspace = {
+        library = vim.tbl_flatten({
+          vim.api.nvim_get_runtime_file("", true),
+          vim.fn.expand("$VIMRUNTIME/lua"),
+          vim.fn.stdpath("config") .. "/lua",
+        }),
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
+    },
+  },
 })
 lspconf.enable('lua_ls')
 

@@ -44,7 +44,8 @@ require("lazy").setup({
   --treeview
     {"stevearc/oil.nvim"},
    --Navigation
-   {'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }},
+   {'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' },
+   opts = { pickers = {colorscheme = {enable_preview = true}}}},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
    --LSP
    {"neovim/nvim-lspconfig"},

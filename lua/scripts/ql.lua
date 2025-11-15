@@ -132,10 +132,48 @@ end
 
 
 vim.api.nvim_create_user_command("QLgetDefs",
-function()
-    local txt = GetAllDefs()
-    if (txt == nil or txt == "") then return end
-    print(txt)
-    vim.fn.setreg('"', txt,'v')
-end, {nargs = 0}
+    function()
+        local txt = GetAllDefs()
+        if (txt == nil or txt == "") then return end
+        print(txt)
+        vim.fn.setreg('"', txt,'v')
+    end, {nargs = 0}
 )
+
+local function get_dirs(s,arg,save_cur)
+    if save_cur then
+        s  = s .. '   "-I' .. arg .. "/" .. '",\n'
+    end
+    for p, t in vim.fs.dir(arg, {depth = 10}) do
+        if t == "directory" then
+            local cur = arg .. "/" .. p
+            s         = s .. '   "-I'.. cur .. '",\n'
+            s         = get_dirs(s,cur, false)
+        end
+    end
+    return s
+end
+
+vim.api.nvim_create_user_command("QLclangdConfig",
+  function(opts)
+      local st
+      local s = "CompileFlags: [\n"
+      for arg in (opts.args or ""):gmatch("%S+") do
+            st = string.gsub(arg,'\\',"")
+            st = string.gsub(st, '//',"")
+            s  = get_dirs(s, vim.fs.abspath("") .. st, true)
+      end
+      s = s .. '   "-ferror-limit=0" \n]'
+      local f = assert(io.open(".clangd","w"))
+      f:write(s)
+      f:close()
+      print(s)
+end,
+{
+    nargs = "*",
+    complete = "dir"
+}
+)
+
+
+

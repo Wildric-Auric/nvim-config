@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd("InsertEnter", { -- load only on start typing
   callback = function()
         local vimApiConfig = false
         local cmp = require('cmp')
-        local luasnip = require('luasnip')
+        -- local luasnip = require('luasnip')
         cmp.setup({
             snippet = {
               -- REQUIRED - you must specify a snippet engine
@@ -32,8 +32,7 @@ vim.api.nvim_create_autocmd("InsertEnter", { -- load only on start typing
               { name = 'buffer' },
             })
           })
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
+        -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
         if vimApiConfig
         then
         require('cmp').setup {
@@ -55,33 +54,31 @@ require('mason-lspconfig').setup({
 local lspconf = vim.lsp
 
 lspconf.config('glsl_analyzer', {
-      capabilities = capabilities,
       filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 })
 lspconf.enable('glsl_analyzer')
 
-lspconf.config('lua_ls', {
-  capabilities = capabilities,
+lspconf.config['lua_ls'] = {
   filetypes = { 'lua' },
   settings = {
     Lua = {
+      runtime = { version = 'LuaJIT'},
       diagnostics = { globals = { 'vim' } },
       workspace = {
-        library = vim.tbl_flatten({
+        library = {
           vim.api.nvim_get_runtime_file("", true),
           vim.fn.expand("$VIMRUNTIME/lua"),
           vim.fn.stdpath("config") .. "/lua",
-        }),
+        },
         checkThirdParty = false,
       },
       telemetry = { enable = false },
     },
   },
-})
+}
 lspconf.enable('lua_ls')
 
 lspconf.config('pylsp', {
-      capabilities = capabilities,
       settings = {
         pylsp = {
           plugins = {
@@ -97,7 +94,6 @@ lspconf.enable('pylsp')
 
 require("clangd_extensions").setup({})
 lspconf.config('clangd', {
-    capabilities = capabilities,
     on_attach = function(client, bufnr)
     vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader)
         if client.server_capabilities.signatureHelpProvider then
@@ -123,7 +119,7 @@ lspconf.enable('clangd')
 lspconf.set_log_level("off")
 
 local function Is_clang_active()
-    local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
     for _, client in ipairs(clients) do
       if client.name == "clangd" then
             return true
@@ -141,9 +137,8 @@ local function Find_Impl(token)
     local builtin = require('telescope.builtin')
     builtin.grep_string( { search = "::" .. token .. "("} )
 end
-    
+
 vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {});
-

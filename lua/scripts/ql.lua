@@ -35,7 +35,9 @@ end
 function QLclangFmt()
     local f = vim.fn.expand("%:p")
     vim.fn.system({'clang-format', '-i', f})
-    vim.cmd('e')
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("e")
+    vim.api.nvim_win_set_cursor(0, pos)
 end
 
 function QLGetDefCol()
@@ -72,6 +74,34 @@ end, {
     nargs = 1
 }
 )
+
+local function format_rec(arg)
+    for p, t in vim.fs.dir(arg, {depth = 10}) do
+        if t == "directory" then
+            format_rec(arg.."/"..p)
+        else
+            local f = arg.."/"..p
+            vim.fn.system({'clang-format', '-i', f})
+        end
+    end
+end
+
+vim.api.nvim_create_user_command("QLclangFmtRec",
+function(opts)
+    for arg in (opts.args or ""):gmatch("%S+") do
+            st = string.gsub(arg,'\\',"")
+            st = string.gsub(st, '//',"")
+            format_rec(st)
+    end
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("e")
+    vim.api.nvim_win_set_cursor(0, pos)
+
+
+end, {
+    nargs = "*",
+    complete = "dir"
+})
 
 vim.api.nvim_create_user_command("QLclangFmt",
 function()
@@ -157,7 +187,7 @@ end
 vim.api.nvim_create_user_command("QLclangdConfig",
   function(opts)
       local st
-      local s = "CompileFlags: [\n"
+      local s = "CompileFlags: \n  Add: [\n"
       for arg in (opts.args or ""):gmatch("%S+") do
             st = string.gsub(arg,'\\',"")
             st = string.gsub(st, '//',"")

@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = {"*.bin", "*.exe", "*.dat", "*.o"},  -- binary file extensions
+    pattern = {"*.bin", "*.exe", "*.dat", "*.o", "*.img"},  -- binary file extensions
     callback = function()
         vim.cmd("%!xxd")             -- convert buffer to hex
         vim.cmd("setlocal binary")   -- treat as binary

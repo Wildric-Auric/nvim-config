@@ -116,7 +116,7 @@ function FixEndBuff()
     local n = vim.api.nvim_get_hl(0, {name = "Normal"})
     if n == nil or n.bg == nil then return end
     local bg = string.format("#%06x", n.bg)
-    vim.cmd("hi EndOfBuffer guibg=" .. bg)
+    vim.cmd("hi EndOfBuffer guifg=" .. bg .. " guibg=" .. bg)
 end
 
 
@@ -126,6 +126,19 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 FixEndBuff()
+
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "ron",
+  callback = function()
+    vim.cmd([[
+      hi! Normal      guifg=#ffffff
+      hi! NormalFloat guifg=#ffffff
+      hi! Identifier  guifg=#ffffff
+      hi! Constant    guifg=#ffC500
+    ]])
+  end,
+})
 
 --vim.api.nvim_create_autocmd("ColorScheme", {
 --    pattern = "retrobox",
@@ -137,4 +150,4 @@ FixEndBuff()
 --  end
 --})
 
-
+vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "NONE", bg = "NONE" })

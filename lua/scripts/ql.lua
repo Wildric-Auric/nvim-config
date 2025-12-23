@@ -189,8 +189,10 @@ vim.api.nvim_create_user_command("QLclangdConfig",
       local st
       local s = "CompileFlags: \n  Add: [\n"
       for arg in (opts.args or ""):gmatch("%S+") do
-            st = string.gsub(arg,'\\',"")
-            st = string.gsub(st, '//',"")
+            st = string.gsub(arg, "^\\+","")
+            st = string.gsub(st, "\\+$", "")
+            st = string.gsub(st, "^/+","")
+            st = string.gsub(st, "/+$", "")
             s  = get_dirs(s, vim.fs.abspath("") .. st, true)
       end
       s = s .. '   "-ferror-limit=0" \n]'

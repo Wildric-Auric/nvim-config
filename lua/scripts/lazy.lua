@@ -44,6 +44,7 @@ require("lazy").setup({
     {'nvim-tree/nvim-web-devicons'},
   --treeview
     {"stevearc/oil.nvim"},
+    {"nvim-tree/nvim-tree.lua"},
    --Navigation
    {'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' },
    opts = { pickers = {colorscheme = {enable_preview = true}}}},
@@ -58,12 +59,21 @@ require("lazy").setup({
    {'hrsh7th/cmp-nvim-lua'},
    {'Issafalcon/lsp-overloads.nvim'},
    {"p00f/clangd_extensions.nvim"},
+   --{"andymass/vim-matchup"},
    --Startup
    {'goolord/alpha-nvim'},
    --StatusLine
    {'nvim-lualine/lualine.nvim'},
    --HexEditor
    --Depends on xxd
-   {'RaafatTurki/hex.nvim'}
+   {'RaafatTurki/hex.nvim'},
+   --other
+   {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
+   }
+
 }
 )

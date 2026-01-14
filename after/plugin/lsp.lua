@@ -83,14 +83,19 @@ lspconf.config('pylsp', {
         pylsp = {
           plugins = {
             pycodestyle = {
-              ignore = {'W391', 'E302','E225', 'W291', 'E113', 'E112', 'E111', 'W293', 'E301'},
-              --maxLineLength = 0
+              ignore = {
+                    'W391', 'E303','E302','E225','W291',
+                    'E113','E112','E111','W293','E301',
+                    'E501','E305','E261','E701','W202'
+                    },
+              enabled = false
             }
           }
         }
       }
 })
 lspconf.enable('pylsp')
+--lspconf.enable('pyright')
 
 require("clangd_extensions").setup({})
 lspconf.config('clangd', {
@@ -118,6 +123,31 @@ lspconf.config('clangd', {
 lspconf.enable('clangd')
 lspconf.set_log_level("off")
 
+
+lspconf.config('rust_analyzer', {
+    on_attach = function(client, bufnr)
+    end,
+    default_settings = {
+      ['rust-analyzer'] = {
+      },
+    },
+})
+
+lspconf.enable('rust_analyzer')
+
+lspconf.config('kotlin_lsp', {
+       root_markers = { "settings.gradle",
+            "build.gradle.kts",
+            "build.gradle",
+            "settings.gradle.kts",
+            "pom.xml",
+            "settings.gradle",
+            ".git",
+        },
+        filetypes = { 'kotlin'  },
+})
+lspconf.enable('kotlin_lsp')
+
 local function Is_clang_active()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
     for _, client in ipairs(clients) do
@@ -142,3 +172,4 @@ vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>"))
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {});
+--vim.g.matchup_matchparen_enabled = 0

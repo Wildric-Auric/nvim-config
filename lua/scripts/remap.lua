@@ -24,7 +24,7 @@ vim.keymap.set("n", "<right>", "a")
 vim.keymap.set("n", "<up>",    "i")
 vim.keymap.set("n", "<down>",  "a")
 
---vim.keymap.set("n", "<leader>tt",  ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>tv",  ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>tt",  ":Oil<CR>")
 vim.keymap.set("t", "<C-o>", [[<C-\><C-n>]])
 --copy using the clipboard

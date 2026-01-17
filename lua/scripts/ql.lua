@@ -207,5 +207,44 @@ end,
 }
 )
 
+AutoSaveOnSwitch = 1
+vim.api.nvim_create_user_command("QLsetAutoSaveOnSwitch",
+    function(opts)
+        local n = tonumber(opts.args)
+        if (n == nil) then
+
+            print("Provide 0 or any number as argument" )
+        else
+            AutoSaveOnSwitch = n
+        end
+    end,
+    {
+     nargs = 1
+    }
+)
+
+vim.api.nvim_create_user_command("QLgetAutoSaveOnSwitch",
+    function(opts)
+        print(AutoSaveOnSwitch)
+    end,
+    {
+        nargs = 0
+    }
+)
+
+vim.api.nvim_create_autocmd("BufLeave", {
+    callback = function()
+        local buff = vim.api.nvim_win_get_buf(0)
+        local m    = false
+        if (buff == nil) then return end
+        local e = vim.bo[buff]
+        m = e.modified
+        m = m and e.buftype == ""
+        m = m and not vim.bo[buff].readonly
+        if (m and (AutoSaveOnSwitch ~= 0)) then
+           vim.cmd(":w")
+        end
+    end
+})
 
 

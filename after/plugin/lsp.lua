@@ -135,7 +135,7 @@ lspconf.config('rust_analyzer', {
 
 lspconf.enable('rust_analyzer')
 
-lspconf.config('kotlin_lsp', {
+lspconf.config('kotlin_language_server', {
        root_markers = { "settings.gradle",
             "build.gradle.kts",
             "build.gradle",
@@ -146,7 +146,7 @@ lspconf.config('kotlin_lsp', {
         },
         filetypes = { 'kotlin'  },
 })
-lspconf.enable('kotlin_lsp')
+lspconf.enable('kotlin_language_server')
 
 local function Is_clang_active()
     local clients = vim.lsp.get_clients({ bufnr = 0 })

@@ -29,9 +29,13 @@ vim.keymap.set("n", "<leader>tt",  ":Oil<CR>")
 vim.keymap.set("t", "<C-o>", [[<C-\><C-n>]])
 --copy using the clipboard
 vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })
-
 vim.keymap.set("n", "<C-_>", "<C-^>", { noremap = true })
+--Lsp diagnostic
+vim.keymap.set("n","<C-j>", function() vim.diagnostic.jump({count=1,  float=true}) end);
+vim.keymap.set("n","<C-k>", function() vim.diagnostic.jump({count=-1, float=true}) end);
+--Window
+vim.keymap.set("n","<M-k>", ":resize +2<CR>", {silent = true});
+vim.keymap.set("n","<M-j>", ":resize -2<CR>", {silent = true});
+vim.keymap.set("n","<M-l>", ":vertical resize +2<CR>", {silent = true});
+vim.keymap.set("n","<M-h>", ":vertical resize -2<CR>", {silent = true});
 
-vim.keymap.set("n","<C-j>", vim.diagnostic.goto_next);
-
-vim.keymap.set("n","<C-k>", vim.diagnostic.goto_prev);

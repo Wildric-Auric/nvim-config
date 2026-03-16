@@ -1,7 +1,7 @@
 
 function TsConfig()
     require'nvim-treesitter.install'.compilers = {"clang"}
-    require'nvim-treesitter.configs'.setup {
+    require'nvim-treesitter'.setup {
         ensure_installed = {}, --"lua","c","cpp","rust","markdown"
         sync_install = false,
         auto_install = true,

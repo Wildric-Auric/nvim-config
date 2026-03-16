@@ -89,6 +89,9 @@ lspconf.config('pylsp', {
                     'E501','E305','E261','E701','W202'
                     },
               enabled = false
+            },
+            jedi = {
+                extra_paths = {vim.fn.expand('~/prg/artha/ArthaSim/content/assets/scripts/_internal')}
             }
           }
         }

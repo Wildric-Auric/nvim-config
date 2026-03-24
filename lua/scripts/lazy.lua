@@ -2,7 +2,7 @@
 function TsConfig()
     require'nvim-treesitter.install'.compilers = {"clang"}
     require'nvim-treesitter'.setup {
-        ensure_installed = {}, --"lua","c","cpp","rust","markdown"
+        ensure_installed = {"lua","c","cpp","rust","markdown"},
         sync_install = false,
         auto_install = true,
         ignore_install = { },
@@ -33,6 +33,7 @@ require("lazy").setup({
     "rktjmp/lush.nvim",
     "EdenEast/nightfox.nvim",
     {"rose-pine/neovim", name = "rose-pine"},
+    {"loctvl842/monokai-pro.nvim"},
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",
@@ -73,7 +74,7 @@ require("lazy").setup({
     dependencies = "nvzone/volt",
     opts = {},
     cmd = { "Typr", "TyprStats" },
-   }
-
+   },
+   {'sindrets/diffview.nvim'},
 }
 )

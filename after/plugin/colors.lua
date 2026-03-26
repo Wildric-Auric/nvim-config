@@ -72,12 +72,12 @@ require("monokai-pro").setup({
   devicons = true,
   styles = {
     comment = { italic = false },
-    keyword = { italic = true },
-    type = { italic = true },
+    keyword = { italic = false },
+    type = { italic =  false },
     storageclass = { italic = false },
     structure = { italic = false },
     parameter = { italic = false },
-    annotation = { italic = true },
+    annotation = { italic = false },
     tag_attribute = { italic = false },
   },
   filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum

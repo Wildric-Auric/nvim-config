@@ -21,7 +21,8 @@ require("lazy").setup({
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
-      branch = "master"
+      branch = "master",
+      lazy = false
     },
 
     {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"},

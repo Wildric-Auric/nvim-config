@@ -17,6 +17,7 @@ require("lazy").setup({
     "EdenEast/nightfox.nvim",
     {"rose-pine/neovim", name = "rose-pine"},
     {"loctvl842/monokai-pro.nvim"},
+    {"ellisonleao/gruvbox.nvim"},
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",

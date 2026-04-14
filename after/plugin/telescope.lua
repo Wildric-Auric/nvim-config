@@ -8,7 +8,8 @@ require('telescope').setup{
         preview_height = 0.75,
       },
     },
-    layout_strategy = 'horizontal',
+    path_display    = {'filename_first'},
+    layout_strategy = 'vertical'
   }
 }
 

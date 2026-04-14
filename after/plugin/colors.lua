@@ -214,14 +214,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
---vim.api.nvim_create_autocmd("ColorScheme", {
---    pattern = "retrobox",
---  callback = function()
---    vim.cmd([[
---      hi! Normal guibg=#101010
---      hi! SignColumn guibg=#101010
---    ]])
---  end
---})
-
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "NONE", bg = "NONE" })

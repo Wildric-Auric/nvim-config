@@ -3,9 +3,11 @@ require('telescope').setup{
     layout_config = {
       horizontal = {
         preview_width = 0.6,
+        preview_cutoff = 0,
      },
       vertical = {
-        preview_height = 0.75,
+        preview_height = 0.57,
+        preview_cutoff = 0,
       },
     },
     path_display    = {'filename_first'},

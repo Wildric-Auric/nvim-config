@@ -53,6 +53,13 @@ require('mason-lspconfig').setup({
 
 local lspconf = vim.lsp
 
+lspconf.config['bashls'] = {
+  cmd = { 'bash-language-server', 'start' },
+  filetypes = { 'bash', 'sh' }
+}
+
+lspconf.enable("bashls")
+
 lspconf.config('glsl_analyzer', {
       filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 })
@@ -124,7 +131,7 @@ lspconf.config('clangd', {
     },
 })
 lspconf.enable('clangd')
-lspconf.set_log_level("off")
+--lspconf.set_log_level("off")
 
 
 lspconf.config('rust_analyzer', {
@@ -150,6 +157,12 @@ lspconf.config('kotlin_language_server', {
         filetypes = { 'kotlin'  },
 })
 lspconf.enable('kotlin_language_server')
+
+lspconf.config('zls', {
+  root_markers = { 'build.zig' },
+  filetypes = { 'zig' }
+})
+lspconf.enable('zls')
 
 local function Is_clang_active()
     local clients = vim.lsp.get_clients({ bufnr = 0 })

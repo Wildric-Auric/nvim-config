@@ -17,7 +17,6 @@ require("lazy").setup({
     "EdenEast/nightfox.nvim",
     {"rose-pine/neovim", name = "rose-pine"},
     {"loctvl842/monokai-pro.nvim"},
-    {"ellisonleao/gruvbox.nvim"},
     --Parser, highlight
     {
       "nvim-treesitter/nvim-treesitter",
@@ -51,8 +50,10 @@ require("lazy").setup({
    --StatusLine
    {'nvim-lualine/lualine.nvim'},
    --HexEditor
-   --Depends on xxd
-   {'RaafatTurki/hex.nvim'},
+   {'RaafatTurki/hex.nvim'}, --Depends on xxd
+   -- Markdown/latex
+   {"OXY2DEV/markview.nvim", lazy = false},
+   {'Thiago4532/mdmath.nvim'}, --works only in kitty
    --other
    {
     "nvzone/typr",
@@ -60,6 +61,5 @@ require("lazy").setup({
     opts = {},
     cmd = { "Typr", "TyprStats" },
    },
-   {'sindrets/diffview.nvim'},
 }
 )

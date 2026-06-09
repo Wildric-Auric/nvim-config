@@ -89,7 +89,7 @@ end
 vim.api.nvim_create_user_command("QLclangFmtRec",
 function(opts)
     for arg in (opts.args or ""):gmatch("%S+") do
-            st = string.gsub(arg,'\\',"")
+            local st = string.gsub(arg,'\\',"")
             st = string.gsub(st, '//',"")
             format_rec(st)
     end
@@ -115,7 +115,6 @@ QLFetchDefaultCol()
 
 vim.api.nvim_create_user_command("QLgetCurDef",
 function()
-        local ts = vim.treesitter
         local utils = require("nvim-treesitter.ts_utils")
         local node = utils.get_node_at_cursor()
         if node == nil then return end
@@ -212,7 +211,6 @@ vim.api.nvim_create_user_command("QLsetAutoSaveOnSwitch",
     function(opts)
         local n = tonumber(opts.args)
         if (n == nil) then
-
             print("Provide 0 or any number as argument" )
         else
             AutoSaveOnSwitch = n
@@ -224,7 +222,7 @@ vim.api.nvim_create_user_command("QLsetAutoSaveOnSwitch",
 )
 
 vim.api.nvim_create_user_command("QLgetAutoSaveOnSwitch",
-    function(opts)
+    function()
         print(AutoSaveOnSwitch)
     end,
     {

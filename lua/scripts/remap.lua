@@ -29,4 +29,4 @@ vim.keymap.set("n","<M-j>", ":resize -2<CR>", {silent = true});
 vim.keymap.set("n","<M-l>", ":vertical resize +2<CR>", {silent = true});
 vim.keymap.set("n","<M-h>", ":vertical resize -2<CR>", {silent = true});
 vim.keymap.set("n","<M-s>", ":vs<CR>");
-vim.keymap.set("n","<M-c>", ":q<CR>");
+vim.keymap.set("n","<M-q>", ":q<CR>");

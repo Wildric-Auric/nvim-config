@@ -22,3 +22,5 @@ vim.updatetime = 50
 vim.opt.colorcolumn = "0"
 
 vim.g.mapleader = " "
+
+vim.keymap.set({"n", "i", "v"}, "<C-z>", "<Nop>")

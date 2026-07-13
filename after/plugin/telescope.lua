@@ -22,6 +22,7 @@ vim.keymap.set('n', '<leader>fdf',
     function()
     builtin.find_files({cwd = vim.fn.input("Search Root: ")}) end, {})
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fw', function()
 	builtin.grep_string( { search = vim.fn.input("Grep > ") } ) end)
 vim.keymap.set('n', '<leader>fcw', function()

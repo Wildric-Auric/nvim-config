@@ -131,8 +131,6 @@ lspconf.config('clangd', {
     },
 })
 lspconf.enable('clangd')
---lspconf.set_log_level("off")
-
 
 lspconf.config('rust_analyzer', {
     on_attach = function(client, bufnr)
@@ -185,7 +183,8 @@ local function Find_Impl(token)
 end
 
 vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {});
-vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {});
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
+vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {})
+lspconf.set_log_level("off")
 --vim.g.matchup_matchparen_enabled = 0

@@ -17,15 +17,6 @@ require("lazy").setup({
     "EdenEast/nightfox.nvim",
     {"rose-pine/neovim", name = "rose-pine"},
     {"loctvl842/monokai-pro.nvim"},
-    --Parser, highlight
-    {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate",
-      branch = "master",
-      lazy = false
-    },
-
-    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"},
     {'nvim-tree/nvim-web-devicons'},
   --treeview
     {"stevearc/oil.nvim"},
@@ -35,13 +26,9 @@ require("lazy").setup({
    opts = { pickers = {colorscheme = {enable_preview = true}}}},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
    --LSP
-   {"neovim/nvim-lspconfig"},
    {'williamboman/mason.nvim'},
    {'williamboman/mason-lspconfig.nvim'},
-   {'hrsh7th/cmp-nvim-lsp'},
-   {'hrsh7th/nvim-cmp'},
    {'L3MON4D3/LuaSnip'},
-   {'hrsh7th/cmp-nvim-lua'},
    {'Issafalcon/lsp-overloads.nvim'},
    {"p00f/clangd_extensions.nvim"},
    --{"andymass/vim-matchup"},

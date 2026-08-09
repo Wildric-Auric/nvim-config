@@ -170,7 +170,21 @@ local function Find_Impl(token)
     builtin.grep_string( { search = "::" .. token .. "("} )
 end
 
-vim.keymap.set('i', '<C-c>', function() vim.lsp.completion.get() end)
+------------------------------keymaps-------------------------------
+vim.keymap.set('n', '<leader>td', 
+function() 
+    local config = vim.diagnostic.config().virtual_lines
+    local v_lines = false
+    if (config == nil or config == false) then 
+        v_lines = {severity = vim.diagnostic.severity.ERROR}
+    end
+    vim.diagnostic.config({virtual_text = v_lines })
+end,
+{ desc = 'Toggle diagnostics virtual lines/text'}
+)
+
+vim.diagnostic.config({virtual_text = {severity = vim.diagnostic.severity.ERROR}})
+
 vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader)
 vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})

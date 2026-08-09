@@ -173,7 +173,7 @@ end
 ------------------------------keymaps-------------------------------
 vim.keymap.set('n', '<leader>td', 
 function() 
-    local config = vim.diagnostic.config().virtual_lines
+    local config = vim.diagnostic.config().virtual_text
     local v_lines = false
     if (config == nil or config == false) then 
         v_lines = {severity = vim.diagnostic.severity.ERROR}

@@ -26,6 +26,7 @@ require("lazy").setup({
    opts = { pickers = {colorscheme = {enable_preview = true}}}},
    {"ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }},
    --LSP
+   {'neovim/nvim-lspconfig'},
    {'williamboman/mason.nvim'},
    {'williamboman/mason-lspconfig.nvim'},
    {'L3MON4D3/LuaSnip'},

@@ -1,39 +1,14 @@
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('my.lsp', {}),
-  callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    if client:supports_method('textDocument/implementation') then
-      -- Create a keymap for vim.lsp.buf.implementation ...
-    end
-    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
-    if client:supports_method('textDocument/completion') then
-        vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
-    end
-  end,
-})
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {'clangd', 'lua_ls','rust_analyzer', 'glsl_analyzer', 'pylsp'},
-    automatic_enable = false,
+    automatic_enable = true,
 })
 
-local lspconf = vim.lsp
-
-lspconf.config['bashls'] = {
-  cmd = { 'bash-language-server', 'start' },
-  filetypes = { 'bash', 'sh' }
-}
-
-lspconf.enable("bashls")
-
-lspconf.config('glsl_analyzer', {
+vim.lsp.config('glsl_analyzer', {
       filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 })
-lspconf.enable('glsl_analyzer')
 
-lspconf.config['lua_ls'] = {
+vim.lsp.config['lua_ls'] = {
   filetypes = { 'lua' },
   settings = {
     Lua = {
@@ -51,10 +26,8 @@ lspconf.config['lua_ls'] = {
     },
   },
 }
-lspconf.enable('lua_ls')
 
-
-lspconf.config('pylsp', {
+vim.lsp.config('pylsp', {
       settings = {
         pylsp = {
           plugins = {
@@ -73,8 +46,6 @@ lspconf.config('pylsp', {
         }
       }
 })
-lspconf.enable('pylsp')
---lspconf.enable('pyright')
 
 ------------------------ c/cpp, clang utilities ------------------------
 require("clangd_extensions").setup({})
@@ -109,29 +80,9 @@ require("lsp-overloads").setup({
   log_level                = "warn",
 })
 
-lspconf.config('clangd', {
-    --on_attach = function(client, bufnr) end,
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--header-insertion=never"
-    },
-})
-lspconf.enable('clangd')
-
 --------------------------------------------------------------------------------
 
-lspconf.config('rust_analyzer', {
-    on_attach = function(client, bufnr)
-    end,
-    default_settings = {
-      ['rust-analyzer'] = {
-      },
-    },
-})
-lspconf.enable('rust_analyzer')
-
-lspconf.config('kotlin_language_server', {
+vim.lsp.config('kotlin_language_server', {
        root_markers = { "settings.gradle",
             "build.gradle.kts",
             "build.gradle",
@@ -142,13 +93,6 @@ lspconf.config('kotlin_language_server', {
         },
         filetypes = { 'kotlin'  },
 })
-lspconf.enable('kotlin_language_server')
-
-lspconf.config('zls', {
-  root_markers = { 'build.zig' },
-  filetypes = { 'zig' }
-})
-lspconf.enable('zls')
 
 local function Is_clang_active()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -170,17 +114,44 @@ local function Find_Impl(token)
     builtin.grep_string( { search = "::" .. token .. "("} )
 end
 
-------------------------------keymaps-------------------------------
-vim.keymap.set('n', '<leader>td', 
-function() 
-    local config = vim.diagnostic.config().virtual_text
-    local v_lines = false
-    if (config == nil or config == false) then 
-        v_lines = {severity = vim.diagnostic.severity.ERROR}
+-----------------------------native lsp params----------------------
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  callback = function(ev)
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    -- if client:supports_method('textDocument/implementation') then
+      -- Create a keymap for vim.lsp.buf.implementation ...
+    --end
+    if client:supports_method('textDocument/completion') then
+        vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = false})
     end
-    vim.diagnostic.config({virtual_text = v_lines })
+  end,
+})
+vim.opt.autocomplete = false
+vim.lsp.log.set_level("off")
+--vim.g.matchup_matchparen_enabled = 2
+vim.opt.completeopt  = {'menuone', 'noselect'}
+vim.o.pumborder      = 'single'
+vim.opt.complete:append('o')
+
+------------------------------keymaps-------------------------------
+vim.keymap.set('n', '<leader>td',
+function()
+    local config = vim.diagnostic.config().virtual_text
+    if (config == nil or config == false) then
+        vim.diagnostic.config({virtual_text = {severity = vim.diagnostic.severity.ERROR}})
+    else
+        vim.diagnostic.config({virtual_text = false})
+    end
 end,
 { desc = 'Toggle diagnostics virtual lines/text'}
+)
+
+vim.keymap.set('i', '<C-n>',
+function()
+    vim.lsp.completion.get()
+end,
+    { desc = 'Trigger autocomplete'}
 )
 
 vim.diagnostic.config({virtual_text = {severity = vim.diagnostic.severity.ERROR}})
@@ -190,9 +161,3 @@ vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>"))
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {})
-lspconf.log.set_level("off")
---vim.g.matchup_matchparen_enabled = 2
-vim.opt.autocomplete = false 
-vim.opt.completeopt  = {'menuone', 'noselect'}
-vim.o.pumborder      = 'single'
-vim.opt.complete:append('o')

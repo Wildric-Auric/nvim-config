@@ -17,7 +17,7 @@ require('telescope').setup{
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-space>', builtin.find_files, {})
---vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fdf',
     function()
     builtin.find_files({cwd = vim.fn.input("Search Root: ")}) end, {})

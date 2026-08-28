@@ -170,6 +170,7 @@ vim.api.nvim_create_user_command("QLgetDefs",
 )
 
 local function get_dirs(s,arg,save_cur)
+    print(arg)
     if save_cur then
         s  = s .. '   "-I' .. arg .. "/" .. '",\n'
     end
@@ -185,14 +186,37 @@ end
 
 vim.api.nvim_create_user_command("QLclangdConfig",
   function(opts)
-      local st
+      local st = ""
       local s = "CompileFlags: \n  Add: [\n"
+      local mq = false
       for arg in (opts.args or ""):gmatch("%S+") do
-            st = string.gsub(arg, "^\\+","")
-            st = string.gsub(st, "\\+$", "")
-            st = string.gsub(st, "^/+","")
-            st = string.gsub(st, "/+$", "")
-            s  = get_dirs(s, vim.fs.abspath("") .. st, true)
+            if arg:sub(1,1) == '"' then
+                mq = true
+            end
+            if mq == true then
+                st = st .. (string.len(st) == 0 and "" or " " ) .. arg
+                if arg:sub(string.len(arg)) == '"'then
+                    mq = false
+                end
+            else
+                st = arg
+            end
+
+            if mq == false then
+
+                st = string.gsub(st, '^\"+',"")
+                st = string.gsub(st, '\"+$', "")
+                st = string.gsub(st, "\\+$", "")
+                st = string.gsub(st, "^\\+","")
+                --st = string.gsub(st, "^/+","")
+                st = string.gsub(st, "/+$", "")
+
+                --TODO:: Add behaviour on windows
+                if st:sub(1,1) ~= "/" and st:sub(1,2) ~= '"/' then
+                    st = vim.fs.abspath("") .. "/" .. st
+                end
+                s  = get_dirs(s, st, true)
+            end
       end
       s = s .. '   "-ferror-limit=0" \n]'
       local f = assert(io.open(".clangd","w"))

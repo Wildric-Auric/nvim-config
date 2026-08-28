@@ -27,6 +27,10 @@ vim.lsp.config['lua_ls'] = {
   },
 }
 
+vim.lsp.config['clangd'] = {
+    cmd = {"clangd", "--header-insertion=never"}
+}
+
 vim.lsp.config('pylsp', {
       settings = {
         pylsp = {
@@ -75,10 +79,12 @@ require("lsp-overloads").setup({
     previous_parameter = "<C-h>",
     close_signature    = "<Tab>",
   },
-  display_automatically    = true,  -- show popup on trigger characters automatically
+  display_automatically    = false,  -- show popup on trigger characters automatically
   override_native_handler  = true,  -- replace vim.lsp.handlers["textDocument/signatureHelp"]
   log_level                = "warn",
 })
+-- "r" for roll signature
+vim.keymap.set({ "n", "i" }, "<A-r>", "<cmd>LspOverloads signature<CR>", { silent = true })
 
 --------------------------------------------------------------------------------
 

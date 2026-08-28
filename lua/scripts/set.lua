@@ -4,6 +4,7 @@ vim.opt.relativenumber = true
 vim.opt.smartindent = false
 vim.opt.cindent     = false
 local indentValue 	= 4
+vim.opt_local.cino:remove("#1")
 vim.opt.tabstop 	= indentValue
 vim.opt.softtabstop = indentValue
 vim.opt.shiftwidth  = indentValue

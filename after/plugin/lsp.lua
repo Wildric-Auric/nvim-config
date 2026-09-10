@@ -89,13 +89,14 @@ vim.keymap.set({ "n", "i" }, "<A-r>", "<cmd>LspOverloads signature<CR>", { silen
 --------------------------------------------------------------------------------
 
 vim.lsp.config('kotlin_language_server', {
-       root_markers = { "settings.gradle",
-            "build.gradle.kts",
-            "build.gradle",
+       root_markers = {
+            --"settings.gradle",
+            --"build.gradle.kts",
+            --"build.gradle",
             "settings.gradle.kts",
-            "pom.xml",
-            "settings.gradle",
-            ".git",
+            --"pom.xml",
+            --"settings.gradle",
+            --".git",
         },
         filetypes = { 'kotlin'  },
 })

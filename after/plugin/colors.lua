@@ -187,7 +187,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       hi! Identifier  guifg=#ffffff
       hi! Constant    guifg=#ffC500
     ]])
+    vim.api.nvim_set_hl(0, "Visual", {
+      bg = "#FFFFFF",
+      fg = "#000000",
+    })
   end,
 })
+
+
 
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "NONE", bg = "NONE" })

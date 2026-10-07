@@ -42,6 +42,7 @@ require("lazy").setup({
    -- Markdown/latex
    {"OXY2DEV/markview.nvim", lazy = false},
    {'Thiago4532/mdmath.nvim'}, --works only in kitty
+   {'julian/lean.nvim'},
    --git
    {'tpope/vim-fugitive'},
    --other

@@ -4,6 +4,7 @@ require('mason-lspconfig').setup({
     automatic_enable = true,
 })
 
+
 vim.lsp.config('glsl_analyzer', {
       filetypes = { 'glsl','vert', 'frag', 'tese', 'tesc', 'geom', 'comp' }
 })
@@ -87,20 +88,6 @@ require("lsp-overloads").setup({
 vim.keymap.set({ "n", "i" }, "<A-r>", "<cmd>LspOverloads signature<CR>", { silent = true })
 
 --------------------------------------------------------------------------------
-
-vim.lsp.config('kotlin_language_server', {
-       root_markers = {
-            --"settings.gradle",
-            --"build.gradle.kts",
-            --"build.gradle",
-            "settings.gradle.kts",
-            --"pom.xml",
-            --"settings.gradle",
-            --".git",
-        },
-        filetypes = { 'kotlin'  },
-})
-
 local function Is_clang_active()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
     for _, client in ipairs(clients) do
@@ -158,7 +145,7 @@ vim.keymap.set('i', '<C-n>',
 function()
     vim.lsp.completion.get()
 end,
-    { desc = 'Trigger autocomplete'}
+    {desc = 'Trigger autocomplete'}
 )
 
 vim.diagnostic.config({virtual_text = {severity = vim.diagnostic.severity.ERROR}})

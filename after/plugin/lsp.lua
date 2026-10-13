@@ -153,5 +153,4 @@ vim.diagnostic.config({virtual_text = {severity = vim.diagnostic.severity.ERROR}
 vim.keymap.set('n', '<A-u>', vim.cmd.ClangdSwitchSourceHeader)
 vim.keymap.set("n", "<leader>fi", function() Find_Impl(vim.fn.expand("<cword>")) end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {})

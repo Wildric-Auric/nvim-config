@@ -186,6 +186,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       hi! NormalFloat guifg=#ffffff
       hi! Identifier  guifg=#ffffff
       hi! Constant    guifg=#ffC500
+      hi! Type        guifg=#ee7d20
     ]])
     vim.api.nvim_set_hl(0, "Visual", {
       bg = "#FFFFFF",

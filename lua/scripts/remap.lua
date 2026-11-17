@@ -10,8 +10,9 @@ vim.keymap.set("n", "<C-s>",  "<C-w>w")
 vim.keymap.set("n", "<C-,>","g,")
 vim.keymap.set("n", "<C-;>","g;")
 
-vim.keymap.set("n", "<leader>tv",  ":NvimTreeToggle<CR>")
-vim.keymap.set("n", "<leader>tt",  ":Oil<CR>")
+vim.keymap.set("n", "<leader>tv", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>tt", ":Oil<CR>")
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>")
 vim.keymap.set("t", "<C-o>", [[<C-\><C-n>]])
 --copy using the clipboard
 vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })

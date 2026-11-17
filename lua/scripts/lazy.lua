@@ -44,7 +44,7 @@ require("lazy").setup({
    {'Thiago4532/mdmath.nvim'}, --works only in kitty
    {'julian/lean.nvim'},
    --git
-   {'tpope/vim-fugitive'},
+   {'NeogitOrg/neogit'},
    --other
    {
     "nvzone/typr",
